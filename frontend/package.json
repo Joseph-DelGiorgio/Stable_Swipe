@@ -14,9 +14,12 @@
     "@mysten/sui.js": "^0.54.1",
     "@mysten/zklogin": "^0.8.1",
     "@suiet/wallet-kit": "^0.5.1",
+    "@types/react-router-dom": "^5.3.3",
+    "framer-motion": "^12.18.1",
     "ipfs-http-client": "^60.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2",
     "tailwindcss": "^4.1.10"
   },
   "devDependencies": {

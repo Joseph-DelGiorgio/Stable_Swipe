@@ -1,11 +1,15 @@
 import { getFullnodeUrl, SuiClient } from '@mysten/sui';
 
-export const suiClient = new SuiClient({ url: getFullnodeUrl('devnet') }); // Use 'testnet' or 'mainnet' as needed
+// Use Sui testnet for all contract calls
+export const suiClient = new SuiClient({ url: getFullnodeUrl('testnet') });
+
+// Default Move package ID for StableSwipe on testnet
+export const STABLESWIPE_PACKAGE_ID = '0x53b23307df35fedec2294ccc80c171abfaee71978f22f8da559c2ab054bdf4a4';
 
 // Example: Call Move contract (create_profile)
 export async function createProfile({
   signer, // Ephemeral keypair or wallet
-  packageId, // Move package address
+  packageId = STABLESWIPE_PACKAGE_ID, // Move package address
   username,
   age,
   gender,
@@ -13,7 +17,7 @@ export async function createProfile({
   imageUri
 }: {
   signer: any,
-  packageId: string,
+  packageId?: string,
   username: string,
   age: number,
   gender: number,
