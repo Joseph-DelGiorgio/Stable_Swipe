@@ -1,25 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import WalletBar from "../components/WalletBar";
+import SwipeCard from "../components/SwipeCard";
+import BoostTimer from "../components/BoostTimer";
+import MatchBanner from "../components/MatchBanner";
+import { useUser } from "../UserContext";
+
+const dummyProfile = {
+  id: "1",
+  name: "Alice",
+  age: 27,
+  bio: "Loves hiking, coffee, and web3.",
+  imageUri: "https://randomuser.me/api/portraits/women/44.jpg",
+};
 
 const SwipePage: React.FC = () => {
+  const [showMatch, setShowMatch] = useState(false);
+  const [boostExpiry, setBoostExpiry] = useState<number | null>(null);
+  const { address, usdcBalance } = useUser();
+
+  const handleSwipeLeft = () => {
+    // TODO: Call on-chain swipe
+  };
+  const handleSwipeRight = () => {
+    setShowMatch(true); // Simulate a match
+  };
+  const handleSuperLike = () => {
+    setBoostExpiry(Math.floor(Date.now() / 1000) + 3600); // 1 hour boost
+  };
+  const handleTip = () => {
+    // TODO: Open TipModal
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-white">
-      {/* TODO: Add WalletBar here */}
+      {address && <WalletBar address={address} usdcBalance={usdcBalance} />}
       <div className="mt-8 w-full max-w-md">
-        {/* TODO: Render SwipeCard components here */}
-        <div className="bg-gray-100 rounded-xl shadow p-8 flex flex-col items-center">
-          <div className="w-32 h-32 bg-gray-300 rounded-full mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">Profile Name</h2>
-          <p className="mb-2">Age • Bio goes here...</p>
-          <div className="flex gap-4 mt-4">
-            <button className="bg-red-500 text-white px-4 py-2 rounded-full">❌</button>
-            <button className="bg-green-500 text-white px-4 py-2 rounded-full">❤️</button>
-            <button className="bg-yellow-400 text-white px-4 py-2 rounded-full">⭐</button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-full">💸</button>
-          </div>
-        </div>
+        <SwipeCard
+          profile={dummyProfile}
+          onSwipeLeft={handleSwipeLeft}
+          onSwipeRight={handleSwipeRight}
+          onSuperLike={handleSuperLike}
+          onTip={handleTip}
+        />
+        {boostExpiry && <BoostTimer expiresAt={boostExpiry} />}
       </div>
+      {showMatch && (
+        <MatchBanner name={dummyProfile.name} onClose={() => setShowMatch(false)} />
+      )}
     </div>
   );
 };
 
-export default SwipePage;
+export default SwipePage; 
