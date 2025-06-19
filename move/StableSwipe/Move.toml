@@ -1,0 +1,13 @@
+[package]
+name = "StableSwipe"
+version = "0.0.1"
+authors = ["StableSwipe Team"]
+
+[addresses]
+stableswipe = "0x0"
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "main" }
+USDC = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/example-coins", rev = "main" }
+
+[dev-dependencies]
