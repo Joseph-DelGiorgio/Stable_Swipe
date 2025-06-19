@@ -1,54 +1,88 @@
-# React + TypeScript + Vite
+# StableSwipe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Web3 Dating App on Sui Blockchain**
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
+StableSwipe is a next-generation decentralized dating app built on the Sui blockchain. It leverages zkLogin for seamless, privacy-preserving authentication, USDC for in-app payments, and a modular Move smart contract backend for innovative features like pay-to-chat, microtips, boosts, and NFT badges.
 
-## Expanding the ESLint configuration
+**Tech Stack:**
+- Frontend: React + Vite + TailwindCSS + TypeScript
+- Blockchain: Sui Move smart contracts (modular)
+- Auth: zkLogin (Google OAuth)
+- Payments: USDC on Sui
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Monorepo Structure
+
+```
+Stable_Swipe/
+├── frontend/           # React app (Vite, Tailwind, TypeScript)
+│   ├── src/
+│   │   ├── components/ # UI components (WalletBar, SwipeCard, etc.)
+│   │   ├── pages/      # Main app pages (Landing, Swipe, Match, etc.)
+│   │   └── ...
+│   └── ...
+├── move/               # Sui Move smart contracts
+│   └── StableSwipe/
+│       ├── Move.toml
+│       └── sources/
+│           ├── profile/
+│           ├── swipe_match/
+│           ├── chat_gate/
+│           ├── tip_payment/
+│           ├── boost/
+│           ├── nft_badge/
+│           └── admin/
+└── README.md           # This file
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Features
+- **zkLogin Onboarding:** Passwordless, privacy-preserving login via Google OAuth
+- **On-chain Profiles:** Create and update user profiles on Sui
+- **Swipe & Match:** Like/dislike logic, mutual match detection
+- **Pay-to-Chat:** Unlock chat with USDC microtransactions
+- **Tips & Boosts:** Send USDC tips, pay to boost profile visibility
+- **NFT Badges:** Mint profile badges for achievements
+- **Admin Controls:** Configurable fees, treasury management
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+---
+
+## Getting Started
+
+### 1. Frontend (React)
+```bash
+cd frontend
+npm install
+npm run dev
 ```
+
+### 2. Move Contracts (Sui)
+```bash
+cd move/StableSwipe
+sui move build
+sui move test
+# Deploy to Sui Devnet/Testnet as needed
+```
+
+---
+
+## Usage
+- Visit the app in your browser (localhost:5173 by default)
+- Sign in with Google (zkLogin)
+- Create your profile, swipe, match, chat, tip, and boost!
+- All actions are powered by Sui Move contracts and USDC payments
+
+---
+
+## Contributing
+Pull requests and issues are welcome! See the code for modularity and extension points.
+
+---
+
+## License
+MIT 
